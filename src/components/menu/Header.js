@@ -19,7 +19,6 @@ import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
 
     const NavBarMobile = (props) => {
         const {
-            children,
             leftItems,
             onPusherClick,
             onToggle,
@@ -57,7 +56,7 @@ import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
                             ))}
                         </Menu.Menu>
                     </Menu>
-                    {children}
+
                 </Sidebar.Pusher>
             </Sidebar.Pushable>
         );
@@ -126,7 +125,7 @@ import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
 
     const leftItems = [
         { as: "a", content: "Home", key: "home" },
-        { as: "a", content: "Users", key: "users" }
+        { as: "a", content: "Products", key: "products" }
     ];
     const rightItems = [
         { as: "a", content: "Login", key: "login" },
