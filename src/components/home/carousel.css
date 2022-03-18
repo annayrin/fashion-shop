@@ -1,0 +1,9 @@
+.carousel-wrapper{
+    max-width: 96%;
+    margin:auto;
+    border: 1px solid white;
+    box-shadow: #282c34;
+    max-height: 600px;
+    border-radius: 20px;
+
+}

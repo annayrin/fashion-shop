@@ -1,11 +1,13 @@
 import Cards from "../card/Cards";
 import "../home/home.css";
+import CarouselComponent from "./Carousel";
 
 
 const Home = () => {
     return (
         <div className="home">
-           <Cards />
+            <CarouselComponent />
+            <Cards />
         </div>
     );
 }
