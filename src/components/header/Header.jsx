@@ -1,16 +1,21 @@
 
 import React from "react";
 import { createMedia } from "@artsy/fresnel";
-import { Container, Icon, Image, Menu, Sidebar } from "semantic-ui-react";
+import { Icon, Image, Menu, Sidebar } from "semantic-ui-react";
+import {Link} from "react-router-dom";
+import {useAuth0} from "@auth0/auth0-react";
 
  const AppMedia = createMedia({
+
     breakpoints: {
     mobile: 320,
     tablet: 768,
     computer: 992,
     largeScreen: 1200,
     widescreen: 1920
+
   }
+
 });
 const { Media, MediaContextProvider } = AppMedia;
 
@@ -38,9 +43,9 @@ const NavBarMobile = (props) => {
       <Sidebar.Pusher
         dimmed={visible}
         onClick={onPusherClick}
-        style={{ minHeight: "15vh" }}
+        style={{ minHeight: "8vh" }}
       >
-        <Menu fixed="top" inverted>
+        <Menu fixed="top" inverted >
           <Menu.Item>
             <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
           </Menu.Item>
@@ -100,7 +105,7 @@ class NavBar extends React.Component {
     const { visible } = this.state;
 
     return (
-      <div>
+      <div style={{ minHeight: "8vh" }}>
         <Media at="mobile">
           <NavBarMobile
             leftItems={leftItems}
@@ -122,17 +127,35 @@ class NavBar extends React.Component {
 }
 
 const leftItems = [
-  { as: "a", content: "Home", key: "home" },
-  { as: "a", content: "Products", key: "products" },
-  { as: "a", content: "Review", key: "review" }
+  { as: Link, to:"/", content: "Home", key: "home" },
+  { as: Link, to:"/products", content: "Products", key: "products" },
+  { as: Link, to:"/review", content: "Review", key: "review" }
 ];
+
 const rightItems = [
-  { as: "a", content: "Login", key: "login" },
-  { as: "a", content: "Register", key: "register" }
+
 ];
+
 function Header() {
+
+    const {user, isAuthenticated} = useAuth0();
+
+    console.log(user);
+    console.log(isAuthenticated);
+
+    rightItems.length = 0;
+
+    if(isAuthenticated){
+        rightItems.push ({ as: Link, to: "/login", content: "Log Out", key: "login" })
+        // rightItems.push(`<div>user.name</div>`,
+        //   `<button onClick={()=> logout()}>Logout<button></button>`);
+    }
+    else {
+        rightItems.push ({ as: Link, to: "/login", content: "Login", key: "login" });
+    }
+
     return (
-<MediaContextProvider>
+        <MediaContextProvider>
       <NavBar leftItems={leftItems} rightItems={rightItems}>
         <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
       </NavBar>
